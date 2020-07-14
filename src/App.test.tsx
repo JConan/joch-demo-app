@@ -1,26 +1,37 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import App from "./App";
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
+import { createBrowserHistory } from "history";
 
 describe("navigation bar", () => {
+  var history = createBrowserHistory();
+
   beforeEach(() => {
     render(
-      <BrowserRouter>
+      <Router history={history}>
         <App />
-      </BrowserRouter>
+      </Router>
     );
   });
 
-  it("should display homepage", () => {
-    screen.getByText(/home/i);
+  it("should display homepage by default", () => {
+    screen.getByText(/page principale :D/i);
   });
 
-  it("should be able to page About me and back to homepage.", () => {
-    screen.getByRole("link", { name: /about me/i }).click();
-    screen.getByText("Page à propos de moi :)");
+  it("should display about page on URL /about", () => {
+    history.push("/about");
+    screen.getByText(/propos de moi/i);
+  });
 
+  it("should be able to go to about page from URL /", () => {
+    screen.getByRole("link", { name: /about me/i }).click();
+    screen.getByText(/propos de moi/i);
+  });
+
+  it("should be able to go back to homepage from URL /about", () => {
+    history.push("/about");
     screen.getByRole("link", { name: /home/i }).click();
-    screen.getByText("Page principale :D");
+    screen.getByText(/page principale :D/i);
   });
 });
