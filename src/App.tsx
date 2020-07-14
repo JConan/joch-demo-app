@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import { NavLink, Route, Switch } from "react-router-dom";
 
 function App() {
