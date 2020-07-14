@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import NavBar from "./components/NavBar";
+import Menu from "./components/Menu";
 
 function App() {
   return (
     <div className="App">
-      <NavBar />
+      <Menu />
       <div className="container-fluid">
         <Switch>
           <Route path="/about">
