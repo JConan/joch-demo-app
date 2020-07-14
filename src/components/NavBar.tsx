@@ -7,9 +7,9 @@ const NavBar: React.SFC<NavBarProps> = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <Link className="navbar-brand" to="/">
-        Joch demo-app
+        <u>DemoApp</u>
       </Link>
-      <div className="collapse navbar-collapse" id="navbarNav">
+      <div className="navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
           <NavBarItem to="/">Home</NavBarItem>
           <NavBarItem to="/about">About me</NavBarItem>
@@ -28,7 +28,7 @@ export interface NavBarItemProps {
 const NavBarItem: React.SFC<NavBarItemProps> = (props) => {
   const matchCurrentPath = useLocation().pathname === props.to;
   return (
-    <li className="nav-item">
+    <li className="nav-item nav item">
       <Link
         className={matchCurrentPath ? "nav-link active" : "nav-link"}
         to={props.to}
