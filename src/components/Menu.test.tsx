@@ -14,6 +14,7 @@ describe("component - navigation bar", () => {
       </Router>
     );
   });
+  afterEach(cleanup)
 
   it("should have by default an active link to home page", () => {
     var link = screen.getByRole("link", { name: /home/i });

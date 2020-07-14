@@ -1,39 +1,41 @@
 import * as React from "react";
-import { Link, useLocation } from "react-router-dom";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
+import { NavLink, Link } from "react-router-dom";
+import "bootstrap/js/dist/collapse"
 
-export interface NavBarProps {}
+
+export interface NavBarProps { }
 
 const Menu: React.SFC<NavBarProps> = () => {
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
-      <Navbar.Brand href="/">Demo-App</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
-          <NavLink href="/">Home</NavLink>
-          <NavLink href="/about">About me</NavLink>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="container-fluid">
+        <Link className="navbar-brand" to="/" >DemoApps</Link>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul className="navbar-nav">
+            <MenuItem to="/">Home</MenuItem>
+            <MenuItem to="/about">About me</MenuItem>
+          </ul>
+        </div>
+      </div>
+    </nav>
   );
 };
 
 export default Menu;
 
-export interface NavLinkProps {
-  href: string;
+interface MenuItemProps {
+  to: string
 }
 
-const NavLink: React.SFC<NavLinkProps> = (props) => {
-  const matchCurrentPath = useLocation().pathname === props.href;
+const MenuItem: React.SFC<MenuItemProps> = (props) => {
   return (
-    <Link
-      className={"nav-link" + (matchCurrentPath ? " active" : "")}
-      to={props.href}
-    >
-      {props.children}
-    </Link>
+    <li className="nav-item">
+      <NavLink className="nav-link" to={props.to} isActive={(_, { pathname }) => props.to === pathname} >
+        {props.children}
+      </NavLink>
+    </li>
   );
-};
+}
