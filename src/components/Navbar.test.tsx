@@ -7,6 +7,7 @@ import NavBar from "./NavBar";
 describe("component - navigation bar", () => {
   var history = createBrowserHistory();
   beforeEach(() => {
+    history.push("/");
     render(
       <Router history={history}>
         <NavBar />
@@ -20,9 +21,20 @@ describe("component - navigation bar", () => {
     expect(link).toHaveAttribute("href", "/");
   });
 
-  it("should have by default an inactive link to about page", () => {
+  it("should have by default an inactive link to about page and active after navigate to it", () => {
     var link = screen.getByRole("link", { name: /about/i });
     expect(link).not.toHaveClass("active");
     expect(link).toHaveAttribute("href", "/about");
+    link.click();
+    expect(link).toHaveClass("active");
+  });
+
+  it("should be able to navigate with links", () => {
+    expect(history.location.pathname).toBe("/");
+    screen.getByRole("link", { name: /about/i }).click();
+    expect(history.location.pathname).toBe("/about");
+
+    screen.getByRole("link", { name: /home/i }).click();
+    expect(history.location.pathname).toBe("/");
   });
 });
