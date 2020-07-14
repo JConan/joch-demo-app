@@ -1,10 +1,10 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, cleanup } from "@testing-library/react";
 import App from "./App";
 import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
 
-describe("navigation bar", () => {
+describe("navigation bar integration", () => {
   var history = createBrowserHistory();
 
   beforeEach(() => {

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export interface NavBarProps {}
 
@@ -26,9 +26,13 @@ export interface NavBarItemProps {
 }
 
 const NavBarItem: React.SFC<NavBarItemProps> = (props) => {
+  const matchCurrentPath = useLocation().pathname === props.to;
   return (
     <li className="nav-item">
-      <Link className="nav-link" to={props.to}>
+      <Link
+        className={matchCurrentPath ? "nav-link active" : "nav-link"}
+        to={props.to}
+      >
         {props.children}
       </Link>
     </li>
